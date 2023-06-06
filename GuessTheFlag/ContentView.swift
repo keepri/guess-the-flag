@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var countryList = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
+    @State private var countrySet = Set(["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"]).shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
     @State private var showScore: Bool = false
     @State private var score: Int = 0
@@ -21,7 +21,7 @@ struct ContentView: View {
     }
     
     func continueGame() {
-        countryList.shuffle()
+        countrySet.shuffle()
         correctAnswer = Int.random(in: 0...2)
     }
     
@@ -54,7 +54,7 @@ struct ContentView: View {
                             .foregroundStyle(.secondary)
                             .font(.subheadline)
                         
-                        Text(countryList[correctAnswer])
+                        Text(countrySet[correctAnswer])
                             .font(.largeTitle.weight(.bold))
                     }
                     
@@ -62,7 +62,7 @@ struct ContentView: View {
                         Button {
                             answer(with: number)
                         } label: {
-                            Image(countryList[number])
+                            Image(countrySet[number])
                                 .renderingMode(.original)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
